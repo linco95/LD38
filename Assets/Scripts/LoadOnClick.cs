@@ -3,12 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class LoadOnClick : MonoBehaviour {
-    private AudioSource source;
     public AudioClip onClickSound;
-
-    public void Awake() {
-        source = GetComponent<AudioSource>();
-    }
 
     private void playSound() {
         if (onClickSound != null) {

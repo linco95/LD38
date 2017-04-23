@@ -18,7 +18,11 @@ public class PlayerMovement : MonoBehaviour {
         rbody = GetComponent<Rigidbody2D>();
     }
 
-    public void FixedUpdate() {
+    private void FixedUpdate() {
+        move();
+    }
+
+    private void move() {
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -28,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
         if (!grounded) {
             moveVertical = 0.0f;
         }
-        if(moveVertical > 0) {
+        if (moveVertical > 0) {
             grounded = false;
         }
 
@@ -38,10 +42,6 @@ public class PlayerMovement : MonoBehaviour {
 
         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
         rbody.AddForce(horizontalMovement * maxSpeed + verticalMovement * jumpVelocity);
-    }
-
-    private void move(float move, bool jump) {
-
     }
 
     // Update is called once per frame
