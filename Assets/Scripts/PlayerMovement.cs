@@ -10,14 +10,27 @@ public class PlayerMovement : MonoBehaviour {
     public float maxSpeed = 40.0f;
     public float GroundRayLength = 5.0f;
     private Rigidbody2D rbody;
+    private bool isBig = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rbody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate() {
+        tryUseAbility();
         move();
+    }
+
+    private void tryUseAbility() {
+        if (!isBig && Input.GetAxis("Fire1") > 0.0f) {
+            transform.localScale = new Vector2(2, 2);
+            isBig = true;
+        }
+        else if (isBig && Input.GetAxis("Fire1") <= 0.0f) {
+            transform.localScale = new Vector2(1, 1);
+            isBig = false;
+        }
     }
 
     private bool isGrounded() {
