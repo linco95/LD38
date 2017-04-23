@@ -13,24 +13,26 @@ public class PlayerMovement : MonoBehaviour {
     public float growSpeed = .5f;
     public float shrinkSpeed = .5f;
     private Rigidbody2D rbody;
-    private bool isBig = false;
 
     // Use this for initialization
     void Start () {
         rbody = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         tryUseAbility();
+    }
+
+    private void FixedUpdate() {
         move();
     }
 
     private void tryUseAbility() {
         if (Input.GetAxis("Fire1") > 0 && transform.localScale.x < maxSize) {
-            transform.localScale += Vector3.one * growSpeed * Time.fixedDeltaTime;
+            transform.localScale += Vector3.one * growSpeed * Time.deltaTime;
         }
         else if (Input.GetAxis("Fire1") == 0 && transform.localScale.x > 1) {
-            transform.localScale -= Vector3.one * shrinkSpeed * Time.fixedDeltaTime;
+            transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
         }
 
         // Adjust in case of going to far
@@ -49,8 +51,12 @@ public class PlayerMovement : MonoBehaviour {
         if (groundcheck != null) {
             ContactFilter2D CF2D = new ContactFilter2D();
             CF2D.SetLayerMask(LayerMask.GetMask("Ground"));
-            Collider2D[] colliders = new Collider2D[1];
-            if (groundcheck.GetComponent<Collider2D>().OverlapCollider(CF2D, colliders) > 0) {
+            Collider2D[] colliders = new Collider2D[10];
+            int numberOfHits = groundcheck.GetComponent<Collider2D>().OverlapCollider(CF2D, colliders);
+            for(int i = 0; i < numberOfHits; i++) {
+                //print(colliders[i].name);
+            }
+            if (numberOfHits > 0) {
                 return true;
             }
         }

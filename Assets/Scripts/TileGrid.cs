@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 public class TileGrid : MonoBehaviour {
 
     // Bitmap for the level
-    public Texture2D levelText;
+    public Texture2D levelTexture;
 
 
     public List<Color> _keys = new List<Color>();
@@ -26,17 +26,17 @@ public class TileGrid : MonoBehaviour {
 
     // Spawns the tiles
     private void createGrid() {
-        Assert.IsNotNull(levelText, "Level bitmap was not assigned");
+        Assert.IsNotNull(levelTexture, "Level bitmap was not assigned");
         Assert.AreNotEqual(ColorToTile.Count, 0, "Colormap should contain at least one tile");
 
-        Color[] levelBitmap = levelText.GetPixels();
+        Color[] levelBitmap = levelTexture.GetPixels();
 
         Vector3 gridPos = transform.position;
 
-        for (int x = 0; x < levelText.width; x++) {
-            for(int y = 0; y < levelText.height; y++) {
+        for (int x = 0; x < levelTexture.width; x++) {
+            for(int y = 0; y < levelTexture.height; y++) {
 
-                Color mapColor = levelBitmap[x + y * levelText.width];
+                Color mapColor = levelBitmap[x + y * levelTexture.width];
                 GameObject tilePrefab;
 
                 // TODO: Check if it really is a tile
