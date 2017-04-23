@@ -22,9 +22,17 @@ LD38 - Small World:
   Gameplay:
     -  Move with wasd
 
-
+  TODO:
+    -  Pause menu
+    -  Progress bar for ability with time values too
+    -  Level desigh
+    -  More tiles
+    -  Animations
+    -  Remove outline from sprites (let unity generate them)
+    -  Sound effects
+    -  Music (siki?)
+    -  Story?
 
 
   Notes:
     font: http://www.dafont.com/pixeled.font
-    
