@@ -6,11 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour {
 
-    public float acceleration = 10.0f;
     public float jumpVelocity = 20.0f;
     public float maxSpeed = 40.0f;
-
-    private bool grounded = true;
+    public float GroundRayLength = 5.0f;
     private Rigidbody2D rbody;
 
 	// Use this for initialization
@@ -22,18 +20,27 @@ public class PlayerMovement : MonoBehaviour {
         move();
     }
 
+    private bool isGrounded() {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, -transform.up, GroundRayLength);
+        Debug.DrawRay(transform.position, -transform.up.normalized * GroundRayLength);
+        foreach (RaycastHit2D hit in hits) {
+            if (hit.transform.CompareTag("Ground")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void move() {
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
         //Store the current vertical input in the float moveVertical.
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveVertical = Input.GetAxis("Jump");
 
-        if (!grounded) {
+        // Trying to jump
+        if (moveVertical > 0.0f && !isGrounded()) {
             moveVertical = 0.0f;
-        }
-        if (moveVertical > 0) {
-            grounded = false;
         }
 
         //Use the two store floats to create a new Vector2 variable movement.
@@ -43,8 +50,4 @@ public class PlayerMovement : MonoBehaviour {
         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
         rbody.AddForce(horizontalMovement * maxSpeed + verticalMovement * jumpVelocity);
     }
-
-    // Update is called once per frame
-    void Update () {
-	}
 }
