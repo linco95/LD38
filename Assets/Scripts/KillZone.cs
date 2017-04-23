@@ -7,7 +7,7 @@ using UnityEngine;
 public class KillZone : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player")) {
-            collision.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+            (collision.GetComponent<PlayerController>()).respawn();
         }
     }
 }

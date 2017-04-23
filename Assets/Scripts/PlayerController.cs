@@ -2,25 +2,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
-    public float jumpVelocity = 20.0f;
-    public float maxSpeed = 40.0f;
-    public float groundRayLength = 5.0f;
-    public float maxSize = 4.0f;
-    public float growSpeed = .5f;
-    public float shrinkSpeed = .5f;
+    public  float jumpVelocity = 250.0f;
+    public  float maxSpeed = 200.0f;
+    public  float groundRayLength = .5f;
+    public  float maxSize = 4.0f;
+    public  float growSpeed = .5f;
+    public  float shrinkSpeed = .5f;
+    public  float maxAbilityTime = 1.0f;
+
+    private Text abilityBarUI;
+
+    private const String AbilityUIText = "ABILITY USED: ";
+    private float timeInAbility = 0.0f;
     private Rigidbody2D rbody;
 
     // Use this for initialization
     void Start () {
         rbody = GetComponent<Rigidbody2D>();
+        timeInAbility = 0.0f;
+        abilityBarUI = GameObject.Find("AbilityBar").GetComponent<Text>();
+
+        updateUI();
+    }
+
+    private void updateUI() {
+        abilityBarUI.text = AbilityUIText + Math.Round(Mathf.Clamp(timeInAbility / maxAbilityTime, 0, 1) * 100) + " %";
     }
 
     private void Update() {
         tryUseAbility();
+    }
+
+    public void respawn() {
+        transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        timeInAbility = 0.0f;
     }
 
     private void FixedUpdate() {
@@ -28,10 +48,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void tryUseAbility() {
-        if (Input.GetAxis("Fire1") > 0 && transform.localScale.x < maxSize) {
+
+        bool canUseAbility = maxAbilityTime > timeInAbility;
+
+        if (canUseAbility && Input.GetAxis("Fire1") > 0 && transform.localScale.x < maxSize) {
             transform.localScale += Vector3.one * growSpeed * Time.deltaTime;
         }
-        else if (Input.GetAxis("Fire1") == 0 && transform.localScale.x > 1) {
+        else if ((!canUseAbility || Input.GetAxis("Fire1") == 0) && transform.localScale.x > 1) {
             transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
         }
 
@@ -42,6 +65,11 @@ public class PlayerMovement : MonoBehaviour {
         else if(transform.localScale.x < 1) {
             transform.localScale = Vector3.one;
         }
+        
+        if(canUseAbility && transform.localScale != Vector3.one) {
+            timeInAbility += Time.deltaTime;
+        }
+        updateUI();
     }
 
     private bool isGrounded() {
