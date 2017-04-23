@@ -43,7 +43,6 @@ public class TileGrid : MonoBehaviour {
                 if (ColorToTile.ContainsKey(mapColor)) {
                     tilePrefab = ColorToTile[mapColor];
                 } else { 
-                    print("Skipping tile");
                     continue;
                 }
 
