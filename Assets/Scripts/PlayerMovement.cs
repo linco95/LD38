@@ -8,7 +8,10 @@ public class PlayerMovement : MonoBehaviour {
 
     public float jumpVelocity = 20.0f;
     public float maxSpeed = 40.0f;
-    public float GroundRayLength = 5.0f;
+    public float groundRayLength = 5.0f;
+    public float maxSize = 4.0f;
+    public float growSpeed = .5f;
+    public float shrinkSpeed = .5f;
     private Rigidbody2D rbody;
     private bool isBig = false;
 
@@ -23,13 +26,19 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void tryUseAbility() {
-        if (!isBig && Input.GetAxis("Fire1") > 0.0f) {
-            transform.localScale = new Vector2(2, 2);
-            isBig = true;
+        if (Input.GetAxis("Fire1") > 0 && transform.localScale.x < maxSize) {
+            transform.localScale += Vector3.one * growSpeed * Time.fixedDeltaTime;
         }
-        else if (isBig && Input.GetAxis("Fire1") <= 0.0f) {
-            transform.localScale = new Vector2(1, 1);
-            isBig = false;
+        else if (Input.GetAxis("Fire1") == 0 && transform.localScale.x > 1) {
+            transform.localScale -= Vector3.one * shrinkSpeed * Time.fixedDeltaTime;
+        }
+
+        // Adjust in case of going to far
+        if(transform.localScale.x > maxSize) {
+            transform.localScale = Vector3.one * maxSize;
+        }
+        else if(transform.localScale.x < 1) {
+            transform.localScale = Vector3.one;
         }
     }
 
@@ -47,8 +56,8 @@ public class PlayerMovement : MonoBehaviour {
         }
         else {
             // Raycast if no groundcheck was found. This will only look in middle of character though
-            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, -transform.up, GroundRayLength);
-            Debug.DrawRay(transform.position, -transform.up.normalized * GroundRayLength, Color.red);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, -transform.up, groundRayLength);
+            Debug.DrawRay(transform.position, -transform.up.normalized * groundRayLength, Color.red);
             foreach (RaycastHit2D hit in hits) {
                 if (hit.transform.CompareTag("Ground")) {
                     return true;
@@ -76,6 +85,6 @@ public class PlayerMovement : MonoBehaviour {
 
         rbody.velocity = horizontalMovement;
         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-        rbody.AddForce(verticalMovement * jumpVelocity);
+        rbody.AddForce(verticalMovement * jumpVelocity * transform.localScale.x);
     }
 }
