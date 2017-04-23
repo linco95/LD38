@@ -40,6 +40,10 @@ public class PlayerMovement : MonoBehaviour {
         rbody.AddForce(horizontalMovement * maxSpeed + verticalMovement * jumpVelocity);
     }
 
+    private void move(float move, bool jump) {
+
+    }
+
     // Update is called once per frame
     void Update () {
 	}
