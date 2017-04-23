@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
     public void respawn() {
         transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
         timeInAbility = 0.0f;
+        transform.localScale = Vector3.one;
     }
 
     private void FixedUpdate() {
