@@ -32,7 +32,11 @@ LD38 - Small World:
     -  Sound effects
     -  Music (siki?)
     -  Story?
+    -  Tutorial texts
 
+  Known bugs:
+    -  Jump is buggy if scaling to big (collideroverlap doesn't work properly)
+    -  Don't fall when moving into wall (even if no ground is below)
 
   Notes:
     font: http://www.dafont.com/pixeled.font
