@@ -14,10 +14,10 @@ The current goal is to get a game with one character, some tile that can hurt/ki
 # Tools
 * Sounds created with [SFXR](http://www.drpetter.se/project_sfxr.html)
 * Sprites created with [Piskel](http://www.piskelapp.com/)
-* [Unity](www.unity3d.com/) was used as game engine
-* [Github](www.github.com/) was used for source control (obviously)
-* [Visual Studio](www.visualstudio.com/) was used for code editing
-* Font is [Pixeled](www.dafont.com/pixeled.font)
+* [Unity](https://www.unity3d.com/) was used as game engine
+* [Github](https://www.github.com/) was used for source control (obviously)
+* [Visual Studio](https://www.visualstudio.com/) was used for code editing
+* Font is [Pixeled](http://www.dafont.com/pixeled.font)
 
 # Credit
-Everything except the music is made by me. Music is made by [Abstraction](www.abstractionmusic.com/)
+Everything except the music is made by me. Music is made by [Abstraction](http://www.abstractionmusic.com/)
