@@ -20,12 +20,11 @@ public class TileGrid : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        generateColorTileDictionary();
-        createGrid();
     }
 
     // Spawns the tiles
-    private void createGrid() {
+    public void createGrid() {
+        generateColorTileDictionary();
         Assert.IsNotNull(levelTexture, "Level bitmap was not assigned");
         Assert.AreNotEqual(ColorToTile.Count, 0, "Colormap should contain at least one tile");
 

@@ -14,20 +14,31 @@ public class PlayerController : MonoBehaviour {
     public  float growSpeed = .5f;
     public  float shrinkSpeed = .5f;
     public  float maxAbilityTime = 1.0f;
+    // Jump, grow, shrink, die
+    public List<AudioClip> sounds = new List<AudioClip>();
 
     private Text abilityBarUI;
-
+    private AudioSource asrc;
     private const String AbilityUIText = "ABILITY USED: ";
     private float timeInAbility = 0.0f;
     private Rigidbody2D rbody;
 
+    
+
     // Use this for initialization
     void Start () {
         rbody = GetComponent<Rigidbody2D>();
+        asrc = gameObject.AddComponent<AudioSource>();
+
         timeInAbility = 0.0f;
         abilityBarUI = GameObject.Find("AbilityBar").GetComponent<Text>();
 
+        GameObject.Find("TileGrid").GetComponent<TileGrid>().createGrid();
+
         updateUI();
+
+        respawn();
+
     }
 
     private void updateUI() {
@@ -38,10 +49,14 @@ public class PlayerController : MonoBehaviour {
         GetComponent<TogglePause>().tooglePause();
     }
 
+
     private void Update() {
         // Check pause status
-        if (Input.GetKeyUp(KeyCode.P)) {
+        if (Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Escape)) {
             togglePause();
+        }
+        if (Input.GetKeyUp(KeyCode.R)) {
+            respawn();
         }
 
         tryUseAbility();
@@ -50,7 +65,11 @@ public class PlayerController : MonoBehaviour {
     public void respawn() {
         transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
         timeInAbility = 0.0f;
+        rbody.velocity = Vector2.zero;
         transform.localScale = Vector3.one;
+        
+        asrc.clip = sounds[3];
+        asrc.Play();
     }
 
     private void FixedUpdate() {
@@ -63,9 +82,20 @@ public class PlayerController : MonoBehaviour {
 
         if (canUseAbility && Input.GetAxis("Fire1") > 0 && transform.localScale.x < maxSize) {
             transform.localScale += Vector3.one * growSpeed * Time.deltaTime;
+
+            // Try to play sound
+            if(!asrc.isPlaying || (asrc.isPlaying && asrc.clip != sounds[1]) ) {
+                asrc.clip = sounds[1];
+                asrc.Play();
+            }
         }
         else if ((!canUseAbility || Input.GetAxis("Fire1") == 0) && transform.localScale.x > 1) {
             transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
+            // Try to play sound
+            if (!asrc.isPlaying || (asrc.isPlaying && asrc.clip != sounds[2])) {
+                asrc.clip = sounds[2];
+                asrc.Play();
+            }
         }
 
         // Adjust in case of going to far
@@ -78,6 +108,10 @@ public class PlayerController : MonoBehaviour {
         
         if(canUseAbility && transform.localScale != Vector3.one) {
             timeInAbility += Time.deltaTime;
+        }
+
+        if(asrc.isPlaying && (transform.localScale == Vector3.one  && asrc.clip == sounds[2]) || (transform.localScale == Vector3.one * maxSize && asrc.clip == sounds[1])) {
+            asrc.Stop();
         }
         updateUI();
     }
@@ -130,5 +164,10 @@ public class PlayerController : MonoBehaviour {
         rbody.velocity = horizontalMovement;
         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
         rbody.AddForce(verticalMovement * jumpVelocity * transform.localScale.x);
+
+        if(moveVertical > 0 && (!asrc.isPlaying || (asrc.isPlaying && asrc.clip == sounds[3]))) {
+            asrc.clip = sounds[0];
+            asrc.Play();
+        }
     }
 }
