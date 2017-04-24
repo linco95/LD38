@@ -1,3 +1,6 @@
+![alt text](https://github.com/linco95/LD38/blob/master/Screenshots/Latescreenshot.PNG?raw=true "Late screenshot of the game")
+*Screenshot of the first level in the game*
+
 # LD38
 My attempt at a Ludum Dare game jam. Starting with 40 hours remaining
 
@@ -9,7 +12,7 @@ I want to use this game jam to get a small, short, project from start to finish.
 The current goal is to get a game with one character, some tile that can hurt/kill that character and the ability to shrink the world. There should be a main menu, one level and a game over/won screen.
 
 ![alt text](https://github.com/linco95/LD38/blob/master/Screenshots/Earlyscreenshot.PNG?raw=true "Early screenshot of the game")
-*Early screenshot with fine programmer art*
+*Early screenshot with fine programmer art. This is the same level as above*
 
 # Tools
 * Sounds created with [SFXR](http://www.drpetter.se/project_sfxr.html)
