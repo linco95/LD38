@@ -18,9 +18,10 @@ public class PlayerController : MonoBehaviour {
     public List<AudioClip> sounds = new List<AudioClip>();
 
     private Animator animController;
-    private Text abilityBarUI;
+    private GameObject abilityBarUI;
+    private Text abilityBarText;
     private AudioSource asrc;
-    private const string AbilityUIText = "ABILITY USED: ";
+    //private const string AbilityUIText = "ABILITY USED: ";
     private float timeInAbility = 0.0f;
     private Rigidbody2D rbody;
 
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour {
         animController = GetComponent<Animator>();
 
         timeInAbility = 0.0f;
-        abilityBarUI = GameObject.Find("AbilityBar").GetComponent<Text>();
+        abilityBarUI = GameObject.Find("AbilityBar");
+        abilityBarText = GameObject.Find("AbilityText").GetComponent<Text>();
 
         GameObject.Find("TileGrid").GetComponent<TileGrid>().createGrid();
 
@@ -44,7 +46,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void updateUI() {
-        abilityBarUI.text = AbilityUIText + Math.Round(Mathf.Clamp(timeInAbility / maxAbilityTime, 0, 1) * 100) + " %";
+        abilityBarText.text = String.Format("{0:0.0} OF {1:0.0} SECONDS USED", timeInAbility, maxAbilityTime);
+        abilityBarUI.transform.localScale = new Vector2(Mathf.Clamp(timeInAbility / maxAbilityTime, 0, 1), abilityBarUI.transform.localScale.y);
     }
 
     public void togglePause() {
