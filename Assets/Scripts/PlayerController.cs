@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour {
 
     public  float jumpVelocity = 250.0f;
@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour {
     // Jump, grow, shrink, die
     public List<AudioClip> sounds = new List<AudioClip>();
 
+    private Animator animController;
     private Text abilityBarUI;
     private AudioSource asrc;
-    private const String AbilityUIText = "ABILITY USED: ";
+    private const string AbilityUIText = "ABILITY USED: ";
     private float timeInAbility = 0.0f;
     private Rigidbody2D rbody;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         rbody = GetComponent<Rigidbody2D>();
         asrc = gameObject.AddComponent<AudioSource>();
+        animController = GetComponent<Animator>();
 
         timeInAbility = 0.0f;
         abilityBarUI = GameObject.Find("AbilityBar").GetComponent<Text>();
@@ -146,6 +148,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void move() {
+        if (isGrounded()) {
+            animController.SetBool("isJumping", false);
+        }
+
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -165,9 +171,15 @@ public class PlayerController : MonoBehaviour {
         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
         rbody.AddForce(verticalMovement * jumpVelocity * transform.localScale.x);
 
-        if(moveVertical > 0 && (!asrc.isPlaying || (asrc.isPlaying && asrc.clip == sounds[3]))) {
-            asrc.clip = sounds[0];
-            asrc.Play();
+        animController.SetBool("isMoving", Math.Abs(moveHorizontal) > 0);
+
+
+        if (moveVertical > 0) {
+            animController.SetBool("isJumping", true);
+            if ((!asrc.isPlaying || (asrc.isPlaying && asrc.clip == sounds[3]))) {
+                asrc.clip = sounds[0];
+                asrc.Play();
+            }
         }
     }
 }
