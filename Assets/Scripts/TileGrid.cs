@@ -9,6 +9,7 @@ public class TileGrid : MonoBehaviour {
     // Bitmap for the level
     public Texture2D levelTexture;
 
+    public String nextLevel = "GameWon";
 
     public List<Color> _keys = new List<Color>();
     public List<GameObject> _values = new List<GameObject>();

@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour {
             transform.localScale = Vector3.one;
         }
         
-        if(canUseAbility && transform.localScale != Vector3.one) {
+        if(canUseAbility && transform.localScale != Vector3.one && Input.GetAxis("Fire1") > 0) {
             timeInAbility += Time.deltaTime;
         }
 
