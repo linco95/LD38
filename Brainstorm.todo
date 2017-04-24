@@ -33,6 +33,7 @@ LD38 - Small World:
     -  Music (siki?)
     -  Story?
     -  Tutorial texts
+    -  Zoom out camera
 
   Known bugs:
     -  Jump is buggy if scaling to big (collideroverlap doesn't work properly)
