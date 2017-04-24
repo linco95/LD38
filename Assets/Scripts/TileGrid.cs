@@ -46,7 +46,7 @@ public class TileGrid : MonoBehaviour {
                     continue;
                 }
 
-                GameObject tile = Instantiate(tilePrefab, gridPos + new Vector3(x, y, 0), Quaternion.identity, transform) as GameObject;
+                Instantiate(tilePrefab, gridPos + new Vector3(x, y, 0), Quaternion.identity, transform);
             }
         }
     }

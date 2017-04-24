@@ -34,7 +34,16 @@ public class PlayerController : MonoBehaviour {
         abilityBarUI.text = AbilityUIText + Math.Round(Mathf.Clamp(timeInAbility / maxAbilityTime, 0, 1) * 100) + " %";
     }
 
+    public void togglePause() {
+        GetComponent<TogglePause>().tooglePause();
+    }
+
     private void Update() {
+        // Check pause status
+        if (Input.GetKeyUp(KeyCode.P)) {
+            togglePause();
+        }
+
         tryUseAbility();
     }
 
