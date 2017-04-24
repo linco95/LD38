@@ -1,4 +1,4 @@
-![alt text](https://github.com/linco95/LD38/blob/master/Screenshots/Latescreenshot.PNG?raw=true "Late screenshot of the game")
+![alt text](https://github.com/linco95/LD38/blob/master/Screenshots/Latescreenshot.png?raw=true "Late screenshot of the game")
 *Screenshot of the first level in the game*
 
 # LD38
