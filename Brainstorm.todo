@@ -25,19 +25,19 @@ LD38 - Small World:
   TODO:
       ✔ Pause menu @done (17-04-24 19:23)
     -  Progress bar for ability with time values too
-    -  Level desigh
-    -  More tiles
+      ✔ Level desigh @done (17-04-24 22:48)
+      ✘ More tiles @cancelled (17-04-24 22:48)
     -  Animations
-    -  Remove outline from sprites (let unity generate them)
-    -  Sound effects
-    -  Music (siki?)
-    -  Story?
-    -  Tutorial texts
+      ✔ Remove outline from sprites (let unity generate them) @done (17-04-24 22:48)
+      ✔ Sound effects @done (17-04-24 22:48)
+      ✔ Music (siki?) @done (17-04-24 22:48)
+      ✘ Story? @cancelled (17-04-24 22:48)
+      ✔ Tutorial texts @done (17-04-24 22:48)
       ✔ Zoom out camera @done (17-04-24 17:53)
 
   Known bugs:
-    -  Jump is buggy if scaling to big (collideroverlap doesn't work properly)
-    -  Don't fall when moving into wall (even if no ground is below)
+      ✔ Jump is buggy if scaling to big (collideroverlap doesn't work properly) @done (17-04-24 22:49) Quick fix, still broken technically, just adapted to max size
+      ✘ Don't fall when moving into wall (even if no ground is below) @cancelled (17-04-24 22:49) It's a feature!
 
   Notes:
     font: http://www.dafont.com/pixeled.font
