@@ -15,7 +15,7 @@ public class FollowCamera2D : MonoBehaviour {
             target = GameObject.FindGameObjectWithTag("Player").transform;
         }
         else { 
-            transform.position = target.position - new Vector3(0.0f, 0.0f, 10.0f);
+            transform.position = target.position - new Vector3(0.0f, 0.0f, 10.0f) * target.localScale.x;
         }
 	}
 }
