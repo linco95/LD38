@@ -27,4 +27,5 @@ Everything except the music is made by me. Music is made by [Abstraction](http:/
 >All these songs are free to download and use under Creative Commons Attribution Share Alike. Please credit these songs to "Abstraction" and either my Soundcloud (@[abstraction](https://soundcloud.com/abstraction)) or personal home (www.abstractionmusic.com). HAPPY CREATING! <3
 
 # License
-This game is developed under the **Creative Commons Attribution Share Alike**. Feel free to fork this project and improve on it or do pull requests if you like.
+This game is developed under the **Creative Commons Attribution Share Alike**. Feel free to fork this project and improve on it or do pull requests if you like. Please send me a message if you do something with this game as it would be nice to see what you come up with. 
+linco95@gmail.com
