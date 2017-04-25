@@ -24,3 +24,7 @@ The current goal is to get a game with one character, some tile that can hurt/ki
 
 # Credit
 Everything except the music is made by me. Music is made by [Abstraction](http://www.abstractionmusic.com/)
+>All these songs are free to download and use under Creative Commons Attribution Share Alike. Please credit these songs to "Abstraction" and either my Soundcloud (@abstraction) or personal home (www.abstractionmusic.com). HAPPY CREATING! <3
+
+# License
+This game is developed under the **Creative Commons Attribution Share Alike**. Feel free to fork this project and improve on it or do pull requests if you like.
